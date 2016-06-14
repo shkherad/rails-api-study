@@ -31,7 +31,7 @@ In your own words, define what the responsibilities of the model layer are in
 Rails.
 
 ```md
-<!-- your answer here -->
+The model layer is the background processes. They are Ruby classes that interact with the database to perform logic tests, authentication, and other calculations. The model layer is the slave to the controller
 ```
 
 ## Define Controller Responsiblities
@@ -40,7 +40,13 @@ In your own words, define what the responsibilities of the controller layer are
 in Rails.
 
 ```md
-<!-- your answer here -->
+The controller is the middle-man: when there is a request, the controller is the master to the model but slave to the dispatcher/browser requests then it responds by returning the product of the request back to the browser.  The maniplulation of the browser is also affected by the view and what the controller passes to view then effects what the controller returns to the browser.
+
+The controller is the translator / commander that tells the model what needs to get done and waits for the result to return back. Data parsing happens here.
+
+-handles sessions, logins, authorization, filters etc
+-default actions
+
 ```
 
 ## Define Router Responsiblities
@@ -48,7 +54,15 @@ in Rails.
 In your own words, define what the router does in Rails.
 
 ```md
-<!-- your answer here -->
+Router responsibilities include finding the information that you request by parsing the input from the url and translating that into an appropriate action for the controller.  It also can generate urls and paths.
+
+-incoming request (in form url + "get"/other method words)
+-router reads the request and matches it to a controller ation
+  -sends to appropriate controller with input parameters based on url request
+-returns instance or whatever associated action was expected from controller.
+
+Router with METHOD(destroy, read, update) on RESOURCE(games/) for instance with PARAMETER(games/15 where 15 is the id:)
+
 ```
 
 ## The Request-Response Cycle in Rails
@@ -57,5 +71,13 @@ Starting with a client making a GET request to a particular URL, describe how
 the parts of Rails interact to produce and send a response.
 
 ```md
-<!-- your answer here -->
+-Client makes get request in form og GET photos/15
+-router receives request and translates it to send to controller
+    apply method GET to resource 'photos' passing parameter 15
+-calls photos controller, passes parameter 15.
+-controller tells model to do behind the scenes work
+    authentication, logic, retrieval
+-model returns information to controller
+-controller bosses view around to adjust view in browser
+-all model + view data send back to the browser for manipulation / resutls
 ```
